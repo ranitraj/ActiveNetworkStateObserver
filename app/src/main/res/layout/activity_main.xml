@@ -1,20 +1,43 @@
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="message"
+            type="String" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/gray_100"
         tools:context=".MainActivity">
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie_network_connection"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="@dimen/dp_0"
+            app:layout_constraintWidth_percent="0.5"
+            app:layout_constraintHeight_percent="0.25"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="false"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tv_message"/>
+
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_message"
+            android:layout_width="@dimen/dp_0"
             android:layout_height="wrap_content"
-            android:text="Hello World!"
+            style="@style/TextView.Header.Medium"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lottie_network_connection"
+            app:layout_constraintWidth_percent="0.6" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
