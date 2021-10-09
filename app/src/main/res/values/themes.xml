@@ -15,9 +15,10 @@
 
     <!-- Text View Style -->
     <style name="TextView.Header.Medium" parent="Widget.AppCompat.TextView">
-        <item name="android:textSize">@dimen/sp_12</item>
+        <item name="android:textSize">@dimen/sp_20</item>
         <item name="android:textColor">@color/gray_700</item>
         <item name="android:padding">@dimen/dp_8</item>
+        <item name="android:textAlignment">center</item>
         <item name="fontFamily">@font/buenard</item>
     </style>
 

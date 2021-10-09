@@ -30,7 +30,7 @@ public class NetworkStateManager {
     /**
      * Updates the active network status live-data
      */
-    public static void setNetworkConnectivityStatus(boolean connectivityStatus) {
+    public void setNetworkConnectivityStatus(boolean connectivityStatus) {
         Log.d(TAG, "setNetworkConnectivityStatus() called with: connectivityStatus = [" + connectivityStatus + "]");
 
         if (Looper.myLooper() == Looper.getMainLooper()) {

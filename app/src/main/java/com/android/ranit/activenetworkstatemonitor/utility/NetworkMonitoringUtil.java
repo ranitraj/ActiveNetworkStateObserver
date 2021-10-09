@@ -10,6 +10,8 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.android.ranit.activenetworkstatemonitor.model.NetworkStateManager;
+
 /**
  * Created by: Ranit Raj Ganguly on 10/10/2021
  */
@@ -18,27 +20,30 @@ public class NetworkMonitoringUtil extends ConnectivityManager.NetworkCallback {
 
     private final NetworkRequest mNetworkRequest;
     private final ConnectivityManager mConnectivityManager;
+    private final NetworkStateManager mNetworkStateManager;
 
     // Constructor
     public NetworkMonitoringUtil(Context context) {
         mNetworkRequest = new NetworkRequest.Builder()
                 .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
-                .addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR)
                 .build();
 
         mConnectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        mNetworkStateManager = NetworkStateManager.getInstance();
     }
 
     @Override
     public void onAvailable(@NonNull Network network) {
         super.onAvailable(network);
         Log.d(TAG, "onAvailable() called: Connected to network");
+        mNetworkStateManager.setNetworkConnectivityStatus(true);
     }
 
     @Override
     public void onLost(@NonNull Network network) {
         super.onLost(network);
         Log.e(TAG, "onLost() called: with: Lost network connection");
+        mNetworkStateManager.setNetworkConnectivityStatus(false);
     }
 
     /**
@@ -56,7 +61,8 @@ public class NetworkMonitoringUtil extends ConnectivityManager.NetworkCallback {
     public void checkNetworkState() {
         try {
             NetworkInfo networkInfo = mConnectivityManager.getActiveNetworkInfo();
-            // TODO: Update live-data
+            mNetworkStateManager.setNetworkConnectivityStatus(networkInfo != null
+                    && networkInfo.isConnected());
         } catch (Exception exception) {
             exception.printStackTrace();
         }

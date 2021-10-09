@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ActiveNetworkStateMonitor</string>
+    <string name="internet_connected">Connected to Internet</string>
+    <string name="internet_disconnected">Disconnected from Internet</string>
 </resources>
