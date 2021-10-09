@@ -1,0 +1,64 @@
+package com.android.ranit.activenetworkstatemonitor.utility;
+
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
+import android.net.NetworkInfo;
+import android.net.NetworkRequest;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+
+/**
+ * Created by: Ranit Raj Ganguly on 10/10/2021
+ */
+public class NetworkMonitoringUtil extends ConnectivityManager.NetworkCallback {
+    public static final String TAG = NetworkMonitoringUtil.class.getSimpleName();
+
+    private final NetworkRequest mNetworkRequest;
+    private final ConnectivityManager mConnectivityManager;
+
+    // Constructor
+    public NetworkMonitoringUtil(Context context) {
+        mNetworkRequest = new NetworkRequest.Builder()
+                .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
+                .addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR)
+                .build();
+
+        mConnectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+    }
+
+    @Override
+    public void onAvailable(@NonNull Network network) {
+        super.onAvailable(network);
+        Log.d(TAG, "onAvailable() called: Connected to network");
+    }
+
+    @Override
+    public void onLost(@NonNull Network network) {
+        super.onLost(network);
+        Log.e(TAG, "onLost() called: with: Lost network connection");
+    }
+
+    /**
+     * Registers the Network-Request callback
+     * (Note: Register only once to prevent duplicate callbacks)
+     */
+    public void registerNetworkCallbackEvents() {
+        Log.d(TAG, "registerNetworkCallbackEvents() called");
+        mConnectivityManager.registerNetworkCallback(mNetworkRequest, this);
+    }
+
+    /**
+     * Check current Network state
+     */
+    public void checkNetworkState() {
+        try {
+            NetworkInfo networkInfo = mConnectivityManager.getActiveNetworkInfo();
+            // TODO: Update live-data
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+}

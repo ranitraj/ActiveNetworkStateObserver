@@ -1,10 +1,11 @@
-package com.android.ranit.activenetworkstatemonitor;
+package com.android.ranit.activenetworkstatemonitor.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import android.os.Bundle;
 
+import com.android.ranit.activenetworkstatemonitor.R;
 import com.android.ranit.activenetworkstatemonitor.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
