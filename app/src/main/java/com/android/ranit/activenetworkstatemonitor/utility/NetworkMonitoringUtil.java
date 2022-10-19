@@ -25,8 +25,7 @@ public class NetworkMonitoringUtil extends ConnectivityManager.NetworkCallback {
     // Constructor
     public NetworkMonitoringUtil(Context context) {
         mNetworkRequest = new NetworkRequest.Builder()
-                .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
-                .addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR)
+                .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
                 .build();
 
         mConnectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
